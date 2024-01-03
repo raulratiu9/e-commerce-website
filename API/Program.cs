@@ -1,5 +1,6 @@
 using API.Controllers;
 using API.Data;
+using API.Middleware;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +22,8 @@ builder
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.UseMiddleware<ExceptionMiddleware>();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -78,9 +81,7 @@ catch (Exception ex)
     logger.LogError(ex, "A problem occured during migration");
 }
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Products}/{action=GetProducts}");
+app.MapControllerRoute(name: "default", pattern: "{controller=Products}/{action=GetProducts}");
 
 app.Run();
 
