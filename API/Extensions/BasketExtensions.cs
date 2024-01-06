@@ -11,7 +11,18 @@ namespace API.Extensions
 {
     public static class BasketExtension
     {
-        private static BasketDto MapBasketToDto(Basket basket)
+        public static IQueryable<Basket> RetrieveBasketWithItems(
+            this IQueryable<Basket> query,
+            string buyerId
+        )
+        {
+            return query
+                .Include(i => i.Items)
+                .ThenInclude(p => p.Product)
+                .Where(b => b.BuyerId == buyerId);
+        }
+
+        public static BasketDto MapBasketToDto(this Basket basket)
         {
             return new BasketDto
             {
@@ -34,17 +45,6 @@ namespace API.Extensions
                     )
                     .ToList()
             };
-        }
-
-        public static IQueryable<Basket> RetrieveBasketWithItems(
-            this IQueryable<Basket> query,
-            string buyerId
-        )
-        {
-            return query
-                .Include(i => i.Items)
-                .ThenInclude(p => p.Product)
-                .Where(b => b.BuyerId == buyerId);
         }
     }
 }
