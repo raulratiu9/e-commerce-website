@@ -18,13 +18,13 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<Review>> GetReviewsByProduct(int productId)
+        public async Task<ActionResult<List<Review>>> GetReviewsByProduct(int productId)
         {
             var product = await _context.Products.FindAsync(productId);
             if (product == null)
                 return NotFound();
 
-            return await _context.Reviews.Include(p => p.ProductId).FirstOrDefaultAsync(r => r.ProductId == productId);
+            return await _context.Reviews.Where(r => r.ProductId == productId).ToListAsync();
         }
 
         [HttpPost]

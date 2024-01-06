@@ -10,6 +10,6 @@ namespace API.Entities
         public string Type { get; set; }
         public string Brand { get; set; }
         public int QuantityInStock { get; set; }
-        public ICollection<Review> Reviews { get; set; }
+        public List<Review> Reviews { get; set; }
     }
 }
