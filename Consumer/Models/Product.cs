@@ -1,4 +1,4 @@
-namespace Consumer.Models
+namespace Consumer.Models;
 
 public class Product
 {
