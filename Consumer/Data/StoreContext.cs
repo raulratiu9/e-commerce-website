@@ -3,12 +3,12 @@ using Consumer.Models.OrderAggregate;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Data
+namespace Consumer.Data
 {
     public class StoreContext : IdentityDbContext<User, Role, int>
     {
         public StoreContext(DbContextOptions options)
-            : base(options) { }
+             : base(options) { }
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Basket> Baskets { get; set; }
