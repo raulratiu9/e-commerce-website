@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Consumer.Data
 {
-    public class StoreContext : IdentityDbContext<User, Role, int>
+    public class ShopContext : IdentityDbContext<User, Role, int>
     {
-        public StoreContext(DbContextOptions options)
+        public ShopContext(DbContextOptions<ShopContext> options)
              : base(options) { }
 
         public DbSet<Product> Products { get; set; }
@@ -18,6 +18,11 @@ namespace Consumer.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.Entity<Product>().ToTable("Products");
+            builder.Entity<Basket>().ToTable("Baskets");
+            builder.Entity<Order>().ToTable("Orders");
+            builder.Entity<Review>().ToTable("Reviews");
+
 
 
             builder
