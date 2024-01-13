@@ -1,4 +1,4 @@
-namespace Consumer.Entities
+namespace Consumer.Models
 {
     public class ErrorViewModel
     {
